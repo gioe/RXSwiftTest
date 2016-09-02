@@ -140,8 +140,7 @@ extension ViewController: UITableViewDataSource, RxTableViewDataSourceType {
             return cell
         }
         
-        cell.textLabel?.text = gif.url
-
+        cell.setupCellWithGIF(gif)
         return cell
     }
 }
