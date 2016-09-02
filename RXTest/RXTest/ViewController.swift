@@ -33,7 +33,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        gifCollectionView.rx_setDelegate(self)
         viewModel = GIFViewModel.init(httpService: GIFHTTPService())
         registerNibs()
         setupBindings(viewModel)
@@ -49,7 +48,9 @@ class ViewController: UIViewController, UISearchBarDelegate {
     }
     
     func setupBindings(viewModel: GIFViewModel){
-        
+
+        gifCollectionView.rx_setDelegate(self)
+
         viewModel.getGifs()
             .bindTo(gifCollectionView.rx_itemsWithDataSource(self))
             .addDisposableTo(disposeBag)
@@ -62,7 +63,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
             .bindTo(viewModel.observableSearchText)
             .addDisposableTo(disposeBag)
         
-        searchBar.rx_cancelButtonClicked
+//attempting to clear the search gif array when you exit from the search bar
+        searchBar.rx_cancelButtonClicked.asControlEvent()
             .map{ "" }
             .bindTo(viewModel.observableSearchText)
             .addDisposableTo(disposeBag)

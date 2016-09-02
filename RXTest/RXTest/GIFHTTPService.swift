@@ -42,7 +42,7 @@ class GIFHTTPService {
             .flatMap { json -> Observable<[GIF]> in
                 var gifArray : [GIF] = []
                 for gif in json["data"].arrayValue
-                {   print(gif)
+                    {   
                         let currentGIF = GIF.init(json: gif)
                         gifArray.append(currentGIF)
                     }

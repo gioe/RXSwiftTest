@@ -24,7 +24,7 @@ class GIFViewModel {
     init (httpService : GIFHTTPService){
 
         self.httpService = httpService
-     
+             
         searchGifs = observableSearchText.asObservable()
             .debounce(0.5, scheduler: MainScheduler.instance)
             .distinctUntilChanged()
@@ -38,10 +38,11 @@ class GIFViewModel {
 
     }
     
+    
     func getGifs() -> Observable<[GIF]>{
         return Observable<[GIF]>.create { (observer) -> Disposable in
             
-            let requestReference = Alamofire.request(.GET, "http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC", parameters: nil, encoding: .JSON, headers: ["Content-type": "application/json"]).responseJSON { (responseObject) -> Void in
+            let requestReference = Alamofire.request(.GET, GIFHTTPService.ResourcePath.TrendingGifs.path, parameters: nil, encoding: .JSON, headers: ["Content-type": "application/json"]).responseJSON { (responseObject) -> Void in
                 
                 if let value = responseObject.result.value!["data"] {
                     let valueArray = JSON(value!)
