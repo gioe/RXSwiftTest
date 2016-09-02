@@ -1,4 +1,4 @@
-//
+ //
 //  ViewController.swift
 //  RXTest
 //
@@ -59,7 +59,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
             .addDisposableTo(disposeBag)
         
         searchBar.rx_text
-            .bindTo(self.viewModel.searchTextObservable)
+            .bindTo(viewModel.searchTextObservable)
             .addDisposableTo(disposeBag)
 
     }
@@ -116,7 +116,8 @@ extension ViewController: UITableViewDataSource, RxTableViewDataSourceType {
     func tableView(tableView: UITableView, observedEvent: Event<[GIF]>) {
         
         switch observedEvent {
-            case .Next( _):break
+            case .Next( _):
+                tableViewData = observedEvent.element!
             case .Error( _): break
             case .Completed:
                 tableViewData = observedEvent.element!
@@ -140,6 +141,7 @@ extension ViewController: UITableViewDataSource, RxTableViewDataSourceType {
         }
         
         cell.textLabel?.text = gif.url
+
         return cell
     }
 }

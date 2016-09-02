@@ -29,7 +29,6 @@ class GIFViewModel {
             .debounce(0.5, scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .flatMapLatest{ searchString -> Observable<[GIF]> in
-                
                 guard !searchString.isEmpty else {
                     return Observable.empty()
                 }

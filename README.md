@@ -12,7 +12,6 @@ Table Views/Collection Views
 The specific function of the app is to ping the Giphy API for the currently trending 25 Gifs and display them in a collection view on the main view controller of the app. Additionally, the user can use the search bar
 to search Giphy for gifs by name, with the attached table view populating with the search results through reactive programming. Subsequent improvements to the app will include pushing a secondary view controller featuring the selected gif from search as well as reformatting the collection view to allow for a more natural spacing between cells of different sizes.
 
-
 Requirements
 
 This project requires Cocoapods. To install cocoapods run sudo gem install cocoapods or refer to the document below
