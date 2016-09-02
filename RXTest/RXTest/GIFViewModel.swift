@@ -18,14 +18,14 @@ class GIFViewModel {
     private let httpService : GIFHTTPService
     private let disposeBag = DisposeBag()
     var searchGifs : Observable<[GIF]>
-    var searchTextObservable = Variable<String>("")
+    var observableSearchText = Variable<String>("")
     var gifArray :[GIF] = []
 
     init (httpService : GIFHTTPService){
 
         self.httpService = httpService
      
-        searchGifs = searchTextObservable.asObservable()
+        searchGifs = observableSearchText.asObservable()
             .debounce(0.5, scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .flatMapLatest{ searchString -> Observable<[GIF]> in

@@ -59,7 +59,12 @@ class ViewController: UIViewController, UISearchBarDelegate {
             .addDisposableTo(disposeBag)
         
         searchBar.rx_text
-            .bindTo(viewModel.searchTextObservable)
+            .bindTo(viewModel.observableSearchText)
+            .addDisposableTo(disposeBag)
+        
+        searchBar.rx_cancelButtonClicked
+            .map{ "" }
+            .bindTo(viewModel.observableSearchText)
             .addDisposableTo(disposeBag)
 
     }
